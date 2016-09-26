@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+
+	<constant name="struts.enable.DynamicMethodInvocation" value="false" />
+	<constant name="struts.devMode" value="true" />
+	<!-- 1.告诉struts2，浏览器的语言是zh_CN，对于日期会自动用中文格式进行转换，只会加载一次，必须重庆tomcat， -->
+	<!-- 2.如果使用了国际化，不能用配置 -->
+	<!-- 3.默认日期转换，使用com.opensymphony.xwork2.conversion.impl.DateConverter,修改这个类默认按照yyyy-MM-dd格式进行转换 -->
+	<constant name="struts.locale" value="zh_CN" />
+
+	<package name="default" namespace="/" extends="struts-default">
+
+		<interceptors>
+			<interceptor-stack name="oaStack">
+				<!-- 默认情况下，进行重定向之后addActionMessage("保存成功");会丢失，加载拦截器并且配置operationMode=AUTOMATIC可以再重定向之后获取 -->
+				<interceptor-ref name="store">
+					<param name="operationMode">AUTOMATIC</param>
+				</interceptor-ref>
+				<interceptor-ref name="defaultStack" />
+			</interceptor-stack>
+		</interceptors>
+
+		<default-interceptor-ref name="oaStack" />
+
+		<action name="emp_*" class="cn.itsource.oa.action.EmpAction"
+			method="{1}">
+			<result>/WEB-INF/views/empList.jsp</result>
+			<result name="input">/WEB-INF/views/empInput.jsp</result>
+			<result name="reload" type="redirectAction">emp</result>
+		</action>
+	</package>
+
+
+</struts>

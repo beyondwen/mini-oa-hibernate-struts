@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="DeptMapper">
+
+	<insert id="save" parameterType="Dept">
+		INSERT INTO t_dept (dname,phone)
+		VALUES(#{dname},#{phone})
+	</insert>
+
+	<update id="update" parameterType="Dept">
+		UPDATE t_dept
+		SET
+		name=#{dname},phone=#{phone}
+		WHERE id = #{id}
+	</update>
+
+	<delete id="delete" parameterType="long">
+		DELETE FROM t_dept WHERE
+		did
+		=
+		#{id}
+	</delete>
+
+	<select id="get" resultType="Dept" parameterType="long">
+		SELECT * FROM
+		t_dept WHERE did = #{id}
+	</select>
+
+	<select id="getAll" resultType="Dept">
+		SELECT * FROM t_dept
+	</select>
+</mapper> 
