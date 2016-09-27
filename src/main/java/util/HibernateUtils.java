@@ -1,22 +1,27 @@
 package util;
 
 
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.boot.MetadataSources;
+import org.hibernate.boot.registry.StandardServiceRegistry;
+import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+
 public enum HibernateUtils {
-//	INSTANCE;
-//	private static SqlSessionFactory factory;//一定要SqlSessionFactory为static变量,不能定义SqlSession
-//
-//	static {
-//		try {
-//			InputStream cfg = Resources
-//					.getResourceAsStream("mybatis-config.xml");
-//			factory = new SqlSessionFactoryBuilder().build(cfg);
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//	}
-//
-//	public SqlSession openSession() {
-//		return factory.openSession();
-//	}
+    INSTANCE;
+    private static SessionFactory sessionFactory;
+
+    static {
+        try {
+            StandardServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder().configure().build();
+            sessionFactory = new MetadataSources(serviceRegistry).buildMetadata().buildSessionFactory();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public Session getSession() {
+        return sessionFactory.openSession();
+    }
 
 }
