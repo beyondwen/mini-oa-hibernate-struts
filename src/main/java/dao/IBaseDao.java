@@ -1,5 +1,7 @@
 package dao;
 
+import java.util.List;
+
 /**
  * 公共dao对象
  */
@@ -11,8 +13,8 @@ public interface IBaseDao<T> {
 
     void update(T t);
 
-    void get(Long id);
+    T get(Long id);
 
-    void getAll();
+    List<T> getAll();
 
 }

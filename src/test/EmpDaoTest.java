@@ -12,14 +12,12 @@ import java.util.List;
 import java.util.Random;
 
 
-
 public class EmpDaoTest {
 	private IEmpService empDao = new EmpServiceImpl();
 	private IDeptService deptDao = new DeptServiceImpl();
 
 	@Test
 	public void save() {
-
 		for (int i = 1; i < 5; i++) {
 			Dept dept = new Dept();
 			dept.setDname("部门" + i);
